@@ -13,6 +13,14 @@
     <% for n in 0..(count-1) %>
       <%= display_strand @strand_names[n], @start, @end, @interval, @node_hashes[n] %>
     <% end %>
+
+
+    <tr>
+      <td colspan=2>&nbsp;<td>
+    </tr>
+
+    <%= display_dateline @start, @end, @interval %>
+
   </table>
 </div>
 

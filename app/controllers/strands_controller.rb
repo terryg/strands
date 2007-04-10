@@ -8,28 +8,7 @@ class StrandsController < ApplicationController
       user = User.find(session[:user])
     end
       
-    @width = 70
-    
-    if params[:range].nil?
-     @range = @width
-    else
-     @range = params[:range].to_i
-    end
-    
-    if params[:start].nil?
-      @start = Time.now - 60*60*24*@range
-    else
-      @start = Time.parse(params[:start]) 
-    end
-
-    @interval = 60*60*24*@range/@width
-    
-    @end = @start +  60*60*24*@range
-    if @end >= Time.now
-      @end = Time.now
-    elsif @end >= @start + @interval
-      @end = @start + @interval
-    end
+    set_parameters
     
     @strand_names = Array.new
     @node_hashes = Array.new
@@ -68,6 +47,21 @@ class StrandsController < ApplicationController
   end
 
   def show
+    set_parameters
+    
+    @strand_names = Array.new
+    @node_hashes = Array.new
+    
+    tag = params[:id]
+    nodes = Node.find_tagged_with(tag)
+      
+    @strand_names<< tag
+    @node_hashes<< make_hash(nodes)
+  end
+  
+  private 
+  
+  def set_parameters
     @width = 70
     
     if params[:range].nil?
@@ -85,23 +79,10 @@ class StrandsController < ApplicationController
     @interval = 60*60*24*@range/@width
     
     @end = @start +  60*60*24*@range
-    if @end >= Time.now
+    if @end > Time.now
       @end = Time.now
-    elsif @end >= @start + @interval
-      @end = @start + @interval
     end
-    
-    @strand_names = Array.new
-    @node_hashes = Array.new
-    
-    tag = params[:id]
-    nodes = Node.find_tagged_with(tag)
-      
-    @strand_names<< tag
-    @node_hashes<< make_hash(nodes)
   end
-  
-  private 
   
   def make_hash(nodes)
     nhash = Hash.new

@@ -37,10 +37,10 @@
 
 <div align="center">
 <ul id="strands-controls">
-  <li>    <strong><a href="/?start=<%=h (@start - 60*60*24*5).strftime("%Y-%m-%d") %>&range=<%=h @range %>">&lt;&lt;</a></strong>
-  <li>     <strong><a href="/?start=<%=h @start.strftime("%Y-%m-%d") %>&range=<%=h (@range + 20) %>">+</a></strong> 
-  <li>    <strong><a href="/?start=<%=h @start.strftime("%Y-%m-%d") %>&range=<%=h (@range - 20) %>">-</a></strong> 
-  <li>    <strong><a href="/?start=<%=h (@start + 60*60*24*20).strftime("%Y-%m-%d") %>&range=<%=h @range %>">&gt;&gt;</a></strong>
+  <li><strong><a href="/?start=<%=h (@start - 60*60*24*5).strftime("%Y-%m-%d") %>&range=<%=h @range %>">&lt;&lt;</a></strong>
+  <li><strong><a href="/?start=<%=h @start.strftime("%Y-%m-%d") %>&range=<%=h (@range + 20) %>">+</a></strong> 
+  <li><strong><a href="/?start=<%=h @start.strftime("%Y-%m-%d") %>&range=<%=h (@range - 20) %>">-</a></strong> 
+  <li><strong><a href="/?start=<%=h (@start + 60*60*24*20).strftime("%Y-%m-%d") %>&range=<%=h @range %>">&gt;&gt;</a></strong>
 </ul>
 </div>
 
