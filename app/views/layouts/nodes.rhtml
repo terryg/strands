@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title><%=h page_title %></title>
+  <%= page_header %>
+  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'calendar-system.css' %>
+  <%= javascript_include_tag 'calendar', 'calendar-en', 'calendar-setup' %>
+
+<% if with_map? %>
+  <%= GMap.header %>
+  <%= @map.to_html %>
+<% end %>
+</head>
+<body>
+<div id="container">
+  <div id="header">
+    <h1><span><a href="http://strnds.com">strnds.com</a></span></h1>
+    <h2>connect time/space</h2>
+  </div>
+
+  <div id="page">
+      <div id="content">
+        <%= @content_for_layout %>
+        <%= javascript_tag 'show_dates_as_local_time()' %>
+      </div>
+    
+      <div id="sidebar">
+        <!-- search -->
+
+        <!-- sidebar components -->
+        <%= render_sidebars %>
+        
+        <!-- adsense -->
+        <%= render :partial => 'shared/adsense' %>
+      </div>
+    </div>
+    <br style="clear:both;" />
+  </div>
+
+  <div id="footer">
+    <hr />
+    <p><a href="http://strnds.com">strnds.com</a></p>
+    <ul>
+      <li>powered by <a href="http://typosphere.org">typo</a> /
+          styled with <a href="http://quotedprintable.com/pages/scribbish">scribbish</a></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>>

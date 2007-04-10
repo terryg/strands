@@ -1,0 +1,55 @@
+<%= error_messages_for 'node' %>
+
+<!--[form:node]-->
+<p><label for="node_label">Label</label><br/>
+<%= text_field 'node', 'label', { :maxlength => 50 }  %></p>
+
+<p><label for="node_body">Body</label><br/>
+<%= text_area 'node', 'body'  %></p>
+
+<p><label for="node_start_date">Start date</label><br/>
+<%= calendar_field 'node', 'start_date',
+        { :class => 'date',
+          :field_title => 'Date',
+          :button_image => 'calendar.png',
+          :button_title => 'Show calendar' },
+        { :firstDay => 1,
+          :ifFormat => '%Y-%m-%d',
+          :range => [1920, 2020],
+          :step => 1,
+          :showOthers => true,
+          :cache => true }
+%>
+</p>
+
+<p><label for="node_end_date">End date</label><br/>
+<%= calendar_field 'node', 'end_date',
+        { :class => 'date',
+          :field_title => 'Date',
+          :button_image => 'calendar.png',
+          :button_title => 'Show calendar' },
+        { :firstDay => 1,
+          :ifFormat => '%Y-%m-%d',
+          :range => [1920, 2020],
+          :step => 1,
+          :showOthers => true,
+          :cache => true }
+%>
+</p>
+
+<p><label for="node_address">Address</label<br/>
+<%= text_field 'node', 'address' %></p>
+
+<p><label for="node_city">city</label<br/>
+<%= text_field 'node', 'city' %></p>
+
+<p><label for="node_statecode">statecode</label<br/>
+<%= text_field 'node', 'statecode' %></p>
+
+<p><label for="node_postcode">postcode</label<br/>
+<%= text_field 'node', 'postcode' %></p>
+
+<p><label for="node_tag_list">Tags</label><br/>
+<%= text_field_tag 'tag_list', @node.tags.collect{|t| t.name}.join(" ") %></p>
+<!--[eoform:node]-->
+

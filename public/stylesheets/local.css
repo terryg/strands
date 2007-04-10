@@ -1,0 +1,33 @@
+/*--------------------------------------------------------------
+ Local.css
+ Add any personal changes that you'd like to make to the theme
+ in this template.
+ --------------------------------------------------------------*/
+hr {
+  border: none 0;
+  border-top: 1px dotted #000;/*the border*/
+  width: 100%;
+  height: 1px;/*whatever the total width of the border-top and border-bottom equal*/
+}
+
+.cleared {
+  clear:both;
+  line-height:0;
+}
+
+#strands-content {
+  float: right;
+  vertical-align: middle;
+}
+
+#strands-controls ul {
+  margin: 0;
+  padding: 0; 
+  list-style-type: none;
+  list-style-image: none;
+ }
+ 
+#strands-controls li {
+  display: inline; 
+}
+

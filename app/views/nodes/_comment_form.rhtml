@@ -1,0 +1,30 @@
+<%= form_remote_tag :url      => {:action => 'comment', :id => @node},
+                    :update   => 'comments_div',
+                    :loading  => "Element.show('spinner'); Element.hide('preview')",
+                    :complete => "Element.hide('spinner'); $('commentform').elements['comment_comment'].value = ''",
+                    :html     => {:id => 'commentform', :class => 'comments' } %>
+
+<div id="preview" style="display:none"></div>
+
+<fieldset>
+  <legend>Comments</legend>
+
+  <p>
+    <label>
+      Comments:
+      <br />
+      <%= text_area 'comment', 'comment' %>
+    </label>
+  </p>
+
+  <p>
+    <%= submit_to_remote('preview', 'Preview',
+                         :url      => { :action => 'comment_preview' },
+                         :update   => 'preview',
+                         :loading  => "Element.show('spinner')",
+                         :complete => "Element.show('preview'); Element.hide('spinner')") %>
+    <%= submit_tag 'Submit' %>
+    <%= image_tag '/images/spinner.gif', :id => 'spinner', :style => 'display:none' %>
+  </p>
+</fieldset>
+<%= end_form_tag %>

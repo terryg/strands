@@ -1,0 +1,34 @@
+<% count = @strand_names.size %>
+
+<% if 0 == count %>
+<h2 class="entry-title">No Strands</h2>
+<% elsif 1 == count %>
+<h2 class="entry-title">Strand</h2>
+<% else %>
+<h2 class="entry-title">Strands</h2>
+<% end %>
+
+<div id="strands-content">
+  <table>
+    <% for n in 0..(count-1) %>
+      <%= display_strand @strand_names[n], @start, @end, @interval, @node_hashes[n] %>
+    <% end %>
+  </table>
+</div>
+
+<div align="center">
+  <ul id="strands-controls">
+    <li><strong><a href="/strands/show/<%=h params[:id] %>?start=<%=h (@start - 60*60*24*5).strftime("%Y-%m-%d") %>&range=<%=h @range %>">&lt;&lt;</a></strong></li>
+    <li><strong><a href="/strands/show/<%=h params[:id] %>?start=<%=h @start.strftime("%Y-%m-%d") %>&range=<%=h (@range + 20) %>">+</a></strong></li>
+    <li><strong><a href="/strands/show/<%=h params[:id] %>?start=<%=h @start.strftime("%Y-%m-%d") %>&range=<%=h (@range - 20) %>">-</a></strong></li>
+    <li><strong><a href="/strands/show/<%=h params[:id] %>?start=<%=h (@start + 60*60*24*20).strftime("%Y-%m-%d") %>&range=<%=h @range %>">&gt;&gt;</a></strong></li>
+  </ul>
+</div>
+
+<div id="strands-footer">
+  <% if logged_in? %>
+    <a href="/nodes/new">create a new node</a>
+  <% else %>
+    <a href="/login">login</a> or <a href="/signup">signup</a> to create new nodes
+  <% end %>
+</div>

@@ -1,0 +1,17 @@
+<ol id="comments" class="comments">
+  <% if @node.published_comments.any? -%>
+    <% for comment in @node.published_comments -%>
+    <li class="comment" id="comment-<%= comment.id %>">
+      <div class="author">
+        <cite><%=h comment.user.login %></cite>
+        <abbr title="<%= comment.created_at.xmlschema %>"><%= distance_of_time_in_words Node.find(comment.commentable_id).created_at, comment.created_at %> later:</abbr>
+      </div>
+      <div class="content">
+        <%= comment.comment %>
+      </div>
+    </li>
+    <% end -%>
+  <% else -%>
+    <li class="dummy_comment" style="display:none">No comments</li>
+  <% end -%>
+</ol>

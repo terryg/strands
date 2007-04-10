@@ -1,0 +1,15 @@
+<%= render :partial => '/shared/node', :object => @node %>
+
+<% if logged_in? %>
+  <h5><a name="comments">Comments</a></h5>
+  <p><a href="#commentform">Leave a response</a></p>
+
+  <div id="comments_div">
+    <%= render :partial => "comment" %>
+  </div>
+ 
+<% else %>
+  <h5><a href="/login">login</a> or <a href="/signup">signup</a> to post comments.</h5>
+<% end %>
+
+<%= render :partial => 'comment_form' if logged_in? %>
