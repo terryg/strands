@@ -5,7 +5,7 @@ class Node < ActiveRecord::Base
   
   belongs_to :user
   has_one :node_comment_statistic
-  
+    
   def date
     start_date.strftime("%Y-%m-%d")
   end
