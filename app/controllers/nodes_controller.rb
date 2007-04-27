@@ -50,7 +50,7 @@ class NodesController < ApplicationController
     @node.tag_list = params[:tag_list]    
     if @node.save
       flash[:notice] = 'Node was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :action => 'tracker'
     else
       render :action => 'new'
     end
@@ -150,7 +150,7 @@ class NodesController < ApplicationController
     if node.user_id = session[:user]
       Node.find(params[:id]).destroy
     end
-    redirect_to :action => 'list'
+    redirect_to :action => 'tracker'
   end
 
   def render_paginated_index(on_empty = "No nodes found...")
