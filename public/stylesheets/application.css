@@ -11,7 +11,10 @@
 @media print { #sidebar { display: none; }
                #content { float: none; width: 90%; }
                #content pre { color: #000; background: #eee; }
-               #content form.comments { display: none; } }
+               #content form.comments { display: none; } 
+               #content form.linked { display: none; }
+}
+
 
 body {
   background: url(../images/background.gif) repeat-x left top;

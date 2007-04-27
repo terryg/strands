@@ -4,7 +4,8 @@ class Node < ActiveRecord::Base
   acts_as_geocodable :address => {:street => :address, :locality => :city, :region => :statecode, :postal_code => :postcode}
   
   belongs_to :user
-
+  has_one :node_comment_statistic
+  
   def date
     start_date.strftime("%Y-%m-%d")
   end
@@ -25,6 +26,16 @@ class Node < ActiveRecord::Base
    ""
   end
   
+  def linked_to_nodes
+    links = LinkedNode.find(:all, :conditions => ["from_node_id = ?", self.id])  
+    links.collect{|l| l.to_node}
+  end
+
+  def linked_from_nodes
+    links = LinkedNode.find(:all, :conditions => ["to_node_id = ?", self.id])  
+    links.collect{|l| l.from_node}
+  end
+    
   # Count articles on a certain date
   def self.count_by_date(year, month = nil, day = nil, limit = nil)
     from, to = self.time_delta(year, month, day)
@@ -166,6 +177,12 @@ class Node < ActiveRecord::Base
   end
   
   validates_presence_of :label
+
+  def after_create
+    sql = "INSERT INTO node_comment_statistics (node_id, last_comment_created_at, last_comment_user_id, comment_count) VALUES (#{self.id}, '#{self.created_at}', #{self.user_id}, 0)"
+    connection.execute(sql)
+  end
+    
 
   private
   

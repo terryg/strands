@@ -1,0 +1,40 @@
+<ol id="linked_nodes" class="linked_nodes">
+  <% if @node.linked_to_nodes.any? -%>
+    <% for node in @node.linked_to_nodes -%>
+    <li class="linked_node" id="linked_node-<%= node.id %>">
+      <div class="author">
+        <a href="/nodes/read/<%= node.id %>">
+        <cite><%=h node.user.login %></cite>
+        <abbr title="<%= node.created_at.xmlschema %>"><%= distance_of_time_in_words Node.find(@node.id).created_at, node.created_at %> later:</abbr>
+        </a>
+      </div>
+      <div class="content">
+        <%= node.body %>
+      </div>
+    </li>
+    <% end -%>
+  <% else -%>
+  <% linked_to = false %>
+  <% end -%>
+
+  <% if @node.linked_from_nodes.any? -%>
+    <% for node in @node.linked_from_nodes -%>
+    <li class="linked_node" id="linked_node-<%= node.id %>">
+      <div class="author">
+        <a href="/nodes/read/<%= node.id %>">
+        <cite><%=h node.user.login %></cite>
+        <abbr title="<%= node.created_at.xmlschema %>"><%= distance_of_time_in_words Node.find(@node.id).created_at, node.created_at %> later:</abbr>
+        </a>
+      </div>
+      <div class="content">
+        <%= node.body %>
+      </div>
+    </li>
+    <% end -%>
+  <% else -%>
+  <% linked_from = false %>
+  <% end -%>
+  
+  <% if not linked_to and not linked_from -%>    <li class="dummy_linked_node" style="display:none">No linked nodes</li>
+  <% end -%>
+</ol>

@@ -1,0 +1,30 @@
+<%= form_remote_tag :url      => {:action => 'linked', :id => @node},
+                    :update   => 'linked_nodes_div',
+                    :loading  => "Element.show('spinner'); Element.hide('preview')",
+                    :complete => "Element.hide('spinner'); $('linkedform').elements['linked_body'].value = ''",
+                    :html     => {:id => 'linkedform', :class => 'linked_nodes' } %>
+
+<div id="preview" style="display:none"></div>
+
+<fieldset>
+  <legend>My take of this event</legend>
+
+  <p>
+    <label>
+      Describe this event:
+      <br />
+      <%= text_area 'linked', 'body' %>
+    </label>
+  </p>
+
+  <p>
+    <%= submit_to_remote('preview', 'Preview',
+                         :url      => { :action => 'linked_preview' },
+                         :update   => 'preview',
+                         :loading  => "Element.show('spinner')",
+                         :complete => "Element.show('preview'); Element.hide('spinner')") %>
+    <%= submit_tag 'Submit' %>
+    <%= image_tag '/images/spinner.gif', :id => 'spinner', :style => 'display:none' %>
+  </p>
+</fieldset>
+<%= end_form_tag %>

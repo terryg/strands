@@ -1,5 +1,5 @@
 class NodesController < ApplicationController
-  before_filter :login_required, :only => [ :new, :create, :edit, :update, :comment ]
+  before_filter :login_required, :only => [ :new, :create, :edit, :update, :comment, :linked ]
 
   helper 'calendar'
   
@@ -16,6 +16,13 @@ class NodesController < ApplicationController
     @node_pages, @nodes = paginate :nodes, :per_page => 10
   end
 
+  def tracker
+   @nodes = Node.find(:all,
+                      :order => "node_comment_statistics.last_comment_created_at DESC",
+                      :include => :node_comment_statistic)
+   render_paginated_index
+  end
+  
   def read
     @node = Node.find(params[:id])  
     
@@ -62,6 +69,49 @@ class NodesController < ApplicationController
       redirect_to :action => 'read', :id => @node
     else
       render :action => 'edit'
+    end
+  end
+  
+  def linked_preview
+    if params[:linked].blank? or params[:linked][:body].blank?
+      render :nothing => true
+      return
+    end
+
+    set_headers
+    @linked_node = this_blog.linked_node.build(params[:linked])
+    @controller = self  
+  end
+  
+  def linked
+    if request.post?
+      begin
+        @node = Node.find(params[:id])
+  
+        @linked_node = Node.new(params[:linked])
+        @linked_node.user_id = session[:user]
+        @linked_node.label = @node.label
+        @linked_node.address = @node.address
+        @linked_node.city = @node.city
+        @linked_node.statecode = @node.statecode
+        @linked_node.postcode = @node.postcode
+        @linked_node.countrycode = @node.countrycode
+        @linked_node.start_date = @node.start_date
+        @linked_node.end_date = @node.end_date
+
+        @linked_node.save!
+        
+        link = LinkedNode.new
+        link.from_node_id = @linked_node.id
+        link.to_node_id = @node.id
+        
+        link.save!
+          
+        redirect_to :action => 'read', :id => @linked_node
+      rescue ActiveRecord::RecordInvalid
+        STDERR.puts @linked_node.errors.inspect
+        render_error(@linked_node)      
+      end
     end
   end
   

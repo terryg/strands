@@ -31,3 +31,66 @@ hr {
   display: inline; 
 }
 
+/* Linked Nodes */
+#content ol.linked_nodes {
+  list-style-type: none;
+  margin: 0; padding: 0;
+}
+
+#content li.linked_node {
+  border: 2px solid #ddd;
+  margin: 0 0 1.5em; padding: 1em;
+}
+
+#content li.linked_node.preview { 
+  background: #ffc;
+  border: 3px solid #fab444;
+  margin: 0 0 1.5em; padding: 1em;
+}
+
+#content li.linked_node   .author { 
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+#content li.linked_node   .author cite {
+  font-size: 16px;
+  letter-spacing: -1px;
+}
+
+#content li.linked_node   .author abbr { color: #999; }
+
+#content li.linked_node .author .gravatar { 
+  margin: 0 0 0.5em 0.5em;
+  float: right; 
+}
+
+#content li.linked_node .author div {
+  margin: 0 0 0.5em 0.5em;
+  width: 60px; height: 60px;
+  background: url(../../images/theme/gravatar.gif) no-repeat left top;
+  float: right; 
+}
+
+#content form.linked_nodes {
+  background: #f2f2f2;
+  border-top: 1px solid #ddd;
+  padding: 1em 0.5em;
+}
+
+#content form.linked_nodes fieldset { 
+  border: none;
+}
+
+#content form.linked_nodes legend { 
+  display: none;
+}
+
+#content form.linked_nodes label { 
+  font-weight: bold;
+}
+
+#content form.linked_nodes textarea { 
+  width: 90%; height: 150px;
+  padding: 3px;
+}

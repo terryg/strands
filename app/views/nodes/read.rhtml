@@ -1,5 +1,23 @@
 <%= render :partial => '/shared/node', :object => @node %>
 
+  <h5><a name="linked">Linked nodes</a></h5>
+
+<% if logged_in? and @node.user_id != session[:user] %>
+
+    <p><a href="#linkedform">Mark as your own</a></p>
+
+<% end %>
+  
+  <div id="linked_div">
+    <%= render :partial => "linked" %>
+  </div>
+
+<% if logged_in? and @node.user_id != session[:user] %>
+
+  <%= render :partial => 'linked_form' if logged_in? %>
+
+<% end %>
+  
 <% if logged_in? %>
   <h5><a name="comments">Comments</a></h5>
   <p><a href="#commentform">Leave a response</a></p>
