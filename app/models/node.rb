@@ -7,11 +7,11 @@ class Node < ActiveRecord::Base
   has_one :node_comment_statistic
     
   def date
-    start_date.strftime("%Y-%m-%d")
+    start_date.strftime("%Y-%m-%d") unless start_date.nil?
   end
 
   def date_url
-    start_date.strftime("%Y/%m/%d")
+    start_date.strftime("%Y/%m/%d") unless start_date.nil?
   end
   
   def permalink_url
