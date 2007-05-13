@@ -1,0 +1,13 @@
+xml.data do
+    @nodes.each do |node|
+      if node.is_duration
+        xml.event("start" => node.start_date, "end" => node.end_date, "isDuration" => "true", "title" => node.label, "link" => node.permalink_url) do
+            node.body        
+        end
+      else
+        xml.event("start" => node.start_date, "title" => node.label, "link" => node.permalink_url) do
+            node.body        
+        end      
+      end
+    end
+end

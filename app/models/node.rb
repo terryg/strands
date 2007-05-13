@@ -163,7 +163,15 @@ class Node < ActiveRecord::Base
   def text_filter=(filter)
     returning(filter.to_text_filter) { |tf| self.text_filter_id = tf.id }
   end
-        
+ 
+  def is_duration
+    result = false
+    if start_date == end_date
+      result = true
+    end
+    return result
+  end
+         
   protected
   
   def self.time_delta(year, month = nil, day = nil)

@@ -1,55 +1,15 @@
 <h2 class="entry-title">Strands</h2>
 
 <div class="strands-content">
-
-<% if logged_in? %>
-<% decrement = 3 %>
-<% else %>
-<% decrement = 2 %>
-<% end %>
-  
-<% count = @strand_names.size %>
-<table>
-<% for n in 0..(count-decrement) %>
-<%= display_strand @strand_names[n], @start, @end, @interval, @node_hashes[n] %>
-<% end %>
-<tr>
-    <td colspan=2>&nbsp;<td>
-</tr>
-<%= display_strand @strand_names[count-(decrement-1)], @start, @end, @interval, @node_hashes[count-2], false %>
-
-<% if 3 == decrement %>
-<tr>
-    <td colspan=2>&nbsp;<td>
-</tr>
-<%= display_strand @strand_names[count-(decrement-2)], @start, @end, @interval, @node_hashes[count-1], false %>
-<% end %>
-
-<tr>
-    <td colspan=2>&nbsp;<td>
-</tr>
-
-<%= display_dateline @start, @end, @interval %>
-
-</table>
-
+  <div id="strands-timeline" style="height: 500px; border: 1px solid #aaa"></div>
 </div>
-
-<div align="center">
-<ul id="strands-controls">
-  <li><strong><a href="/?start=<%=h (@start - 60*60*24*5).strftime("%Y-%m-%d") %>&range=<%=h @range %>">&lt;&lt;</a></strong>
-  <li><strong><a href="/?start=<%=h @start.strftime("%Y-%m-%d") %>&range=<%=h (@range + 20) %>">+</a></strong> 
-  <li><strong><a href="/?start=<%=h @start.strftime("%Y-%m-%d") %>&range=<%=h (@range - 20) %>">-</a></strong> 
-  <li><strong><a href="/?start=<%=h (@start + 60*60*24*20).strftime("%Y-%m-%d") %>&range=<%=h @range %>">&gt;&gt;</a></strong>
-</ul>
-</div>
+	
+<p/>
 
 <div id="strands-footer">
-
-<% if logged_in? %>
-<a href="nodes/new">create a new node</a>
-<% else %>
-<a href="/login">login</a> or <a href="/signup">signup</a> to create new nodes
-<% end %>
-
+  <% if logged_in? %>
+    <a href="nodes/new">create a new node</a>
+  <% else %>
+    <a href="/login">login</a> or <a href="/signup">signup</a> to create new nodes
+  <% end %>
 </div>

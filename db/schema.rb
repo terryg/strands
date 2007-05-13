@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 5) do
+ActiveRecord::Schema.define(:version => 7) do
 
   create_table "comments", :force => true do |t|
     t.column "comment",          :text,                   :default => ""
@@ -36,6 +36,24 @@ ActiveRecord::Schema.define(:version => 5) do
   add_index "geocodings", ["geocodable_id"], :name => "geocodings_geocodable_id_index"
   add_index "geocodings", ["geocodable_type"], :name => "geocodings_geocodable_type_index"
   add_index "geocodings", ["geocode_id"], :name => "geocodings_geocode_id_index"
+
+  create_table "history", :force => true do |t|
+    t.column "user_id",   :integer,  :default => 0, :null => false
+    t.column "node_id",   :integer,  :default => 0, :null => false
+    t.column "viewed_at", :datetime
+  end
+
+  create_table "linked_nodes", :force => true do |t|
+    t.column "from_node_id", :integer, :default => 0, :null => false
+    t.column "to_node_id",   :integer, :default => 0, :null => false
+  end
+
+  create_table "node_comment_statistics", :force => true do |t|
+    t.column "node_id",                 :integer,  :default => 0, :null => false
+    t.column "last_comment_created_at", :datetime
+    t.column "last_comment_user_id",    :integer,  :default => 0, :null => false
+    t.column "comment_count",           :integer
+  end
 
   create_table "nodes", :force => true do |t|
     t.column "label",       :string,   :limit => 50, :default => ""

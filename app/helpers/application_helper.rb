@@ -7,7 +7,10 @@ module ApplicationHelper
   end
   
   def page_header
-    return ""
+<<-EOL
+<script src="http://simile.mit.edu/timeline/api/timeline-api.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+EOL
   end
  
   # Produce a link to the permalink_url of 'item'.
