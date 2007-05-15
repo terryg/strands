@@ -1,7 +1,7 @@
 xml.data do
     @nodes.each do |node|
       if node.is_duration
-        xml.event(node.body, { "start" => node.start_date, "end" => node.end_date, "isDuration" => "true", "title" => node.label, "link" => node.permalink_url }) do       
+        xml.event("start" => node.start_date, "end" => node.end_date, "isDuration" => "true", "title" => node.label, "link" => node.permalink_url) do       
          xml.text! node.body
         end
       else
