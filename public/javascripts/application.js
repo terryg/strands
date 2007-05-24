@@ -25,7 +25,7 @@ function onLoad() {
   bandInfos[1].highlight = true;
   
   tl = Timeline.create(document.getElementById("strands-timeline"), bandInfos);
-  Timeline.loadXML("/strands/nodes", function(xml, url) { eventSource.loadXML(xml, url); });
+  Timeline.loadXML("/strands/nodes.xml", function(xml, url) { eventSource.loadXML(xml, url); });
 }
 
 function onLoadShow() {
@@ -51,7 +51,7 @@ function onLoadShow() {
   bandInfos[1].highlight = true;
   
   tl = Timeline.create(document.getElementById("strands-timeline"), bandInfos);
-  Timeline.loadXML("/strands/show_nodes", function(xml, url) { eventSource.loadXML(xml, url); });
+  Timeline.loadXML("/strands/show_nodes.xml", function(xml, url) { eventSource.loadXML(xml, url); });
 }
 
 var resizeTimerID = null;

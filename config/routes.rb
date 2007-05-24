@@ -20,8 +20,11 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.
-  map.connect '', :controller => "strands"
+  map.connect '', :controller => 'strands'
 
+  map.connect 'strands/nodes.xml', :controller => 'strands', :action => 'nodes'
+  map.connect 'strands/show_nodes.xml', :controller => 'strands', :action => 'show_nodes'
+  
   # allow neat perma urls
   map.connect 'nodes',
     :controller => 'nodes', :action => 'index'
