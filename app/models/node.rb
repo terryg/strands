@@ -16,16 +16,16 @@ class Node < ActiveRecord::Base
  
   def start_date_gmt
     unless start_date.nil?
-      result = start_date.strftime("%a %b %d %Y %H:%M:%S")
-      result = result + " GMT" + start_date.gmt_offset.to_s
+      result = start_date.gmt.strftime("%a %b %d %Y %H:%M:%S")
+      result = result + " GMT-0000"
       return result
     end
   end
   
   def end_date_gmt
     unless end_date.nil?
-      result = end_date.strftime("%a %b %d %Y %H:%M:%S")
-      result = result + " GMT" + end_date.gmt_offset.to_s
+      result = end_date.gmt.strftime("%a %b %d %Y %H:%M:%S")
+      result = result + " GMT-0000"
       return result
     end
   end
