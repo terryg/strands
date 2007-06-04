@@ -16,12 +16,18 @@ class Node < ActiveRecord::Base
  
   def start_date_gmt
     unless start_date.nil?
-      strftime("%a %b %d %Y %H:%M:%S GMT") unless start_date.nil?
+      result = start_date.strftime("%a %b %d %Y %H:%M:%S")
+      result = result + " GMT" + start_date.gmt_offset
+      return result
     end
   end
   
   def end_date_gmt
-   end_date.strftime("%Y-%m-%d") unless end_date.nil?
+    unless end_date.nil?
+      result = end_date.strftime("%a %b %d %Y %H:%M:%S")
+      result = result + " GMT" + end_date.gmt_offset
+      return result
+    end
   end
     
   def permalink_url
