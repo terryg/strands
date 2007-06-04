@@ -1,11 +1,11 @@
 xml.data do
     @nodes.each do |node|
       if node.is_duration
-        xml.event("start" => node.start_date, "end" => node.end_date, "isDuration" => "true", "title" => node.label, "link" => node.permalink_url) do       
+        xml.event("start" => node.start_date_gmt, "end" => node.end_date_gmt, "isDuration" => "true", "title" => node.label, "link" => node.permalink_url) do       
          xml.text! node.body
         end
       else
-        xml.event("start" => node.start_date, "title" => node.label, "link" => node.permalink_url) do
+        xml.event("start" => node.start_date_gmt, "title" => node.label, "link" => node.permalink_url) do
           xml.text! node.body
         end      
       end

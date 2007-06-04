@@ -13,7 +13,17 @@ class Node < ActiveRecord::Base
   def date_url
     start_date.strftime("%Y/%m/%d") unless start_date.nil?
   end
+ 
+  def start_date_gmt
+    unless start_date.nil?
+      strftime("%a %b %d %Y %H:%M:%S GMT") unless start_date.nil?
+    end
+  end
   
+  def end_date_gmt
+   end_date.strftime("%Y-%m-%d") unless end_date.nil?
+  end
+    
   def permalink_url
     "/nodes/read/#{id}"
   end
