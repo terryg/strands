@@ -13,7 +13,23 @@ class Node < ActiveRecord::Base
   def date_url
     start_date.strftime("%Y/%m/%d") unless start_date.nil?
   end
- 
+
+  def start_date_extended
+    start_date.strftime("%Y-%m-%d") unless start_date.nil?
+  end
+
+  def start_date_url
+    start_date.strftime("%Y/%m/%d") unless start_date.nil?
+  end
+  
+  def end_date_extended
+    end_date.strftime("%Y-%m-%d") unless end_date.nil?
+  end
+
+  def end_date_url
+    end_date.strftime("%Y/%m/%d") unless end_date.nil?
+  end
+   
   def start_date_gmt
     unless start_date.nil?
       result = start_date.gmtime.strftime("%a %b %d %Y %H:%M:%S")
@@ -181,9 +197,9 @@ class Node < ActiveRecord::Base
   end
  
   def is_duration
-    result = false
+    result = true
     if start_date == end_date
-      result = true
+      result = false
     end
     return result
   end
