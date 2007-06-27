@@ -26,8 +26,11 @@
         <br class="clear" />
         
         <div class="entry-time">
-          <%=h node.date %> (<a href="/nodes/<%=h node.date_url %>">more at...</a>)
+          <%=h node.start_date_extended %> (<a href="/nodes/<%=h node.date_url %>">more at...</a>)
         </div>
+        <div class="entry-time">
+          <%=h node.end_date_extended %>
+        </div>        
         
         <br class="clear" />
 
