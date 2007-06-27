@@ -68,6 +68,24 @@ class Node < ActiveRecord::Base
     links.collect{|l| l.from_node}
   end
     
+  def linked_to(user_id)
+    result = false
+    
+    linked_to_nodes.each do |n|
+      if n.user_id == user_id
+        result = true
+      end
+    end
+
+    linked_from_nodes.each do |n|
+      if n.user_id == user_id
+        result = true
+      end
+    end
+    
+    return result  
+  end
+    
   # Count articles on a certain date
   def self.count_by_date(year, month = nil, day = nil, limit = nil)
     from, to = self.time_delta(year, month, day)

@@ -12,7 +12,7 @@
     <%= render :partial => "linked" %>
   </div>
 
-<% if logged_in? and @node.user_id != session[:user] %>
+<% if logged_in? and @node.user_id != session[:user] and not @node.linked_to(session[:user]) %>
 
   <%= render :partial => 'linked_form' if logged_in? %>
 
