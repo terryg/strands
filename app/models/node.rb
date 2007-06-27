@@ -216,7 +216,9 @@ class Node < ActiveRecord::Base
  
   def is_duration
     result = true
-    if start_date == end_date
+    if end_date.nil?
+      result = false
+    elsif start_date == end_date
       result = false
     end
     return result
