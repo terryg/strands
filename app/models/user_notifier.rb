@@ -3,7 +3,7 @@ class UserNotifier < ActionMailer::Base
     setup_email(user)
     @subject    += 'Please activate your new account'
   
-    @body[:url]  = "http://strnds.com/activate/#{user.activation_code}"
+    @body[:url]  = "http://strnds.com/users/activate/#{user.activation_code}"
   
   end
   
