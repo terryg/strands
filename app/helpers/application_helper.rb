@@ -9,7 +9,6 @@ module ApplicationHelper
   def page_header
 <<-EOL
 <script src="http://simile.mit.edu/timeline/api/timeline-api.js" type="text/javascript"></script>
-<script src="/javascripts/application.js" type="text/javascript"></script>
 EOL
   end
  
@@ -20,7 +19,7 @@ EOL
   end
 
   def author_link(node)
-    node.user.login
+    "<a href=\"/user/show/#{node.user.id}\">#{node.user.login}</a>"
   end
 
   # The '5 comments' link from the bottom of nodes

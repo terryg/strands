@@ -1,0 +1,22 @@
+<h1>edit profile
+<span class="smallText"> (<a href="/user/show/<%= @user.id %>">show profile</a>)
+</span>
+</h1>
+
+<table>
+	<tr>
+		<th>login</th>
+		<td><%= @user.login %></td>
+	</tr>
+	<tr>
+		<th>email</th>
+		<td><%= @user.email %></td>
+	</tr>
+</table>
+
+<br/>
+<a href="/user/show/<%= @user.id %>">cancel changes</a>
+
+<br/><br/><br/>
+
+<%= link_to "delete my account", { :action => 'destroy', :id => @user.id }, :confirm => "Are you sure?" %>

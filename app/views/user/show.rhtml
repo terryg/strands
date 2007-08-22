@@ -1,0 +1,13 @@
+<table cellspacing="3" border="0" class="box" width="100%">
+	<tr>
+		<th width="25%">username</th>
+		<td>
+			<div style="float: left;"><%= @user.login %></div>
+			<div class="greyText smallText" style="float: right;"><a href="/user/show/<%= @user.id %>">http://strnds.com/user/show/<%= @user.id %></a></div>
+		</td>
+	</tr>
+	<tr>
+		<th>member since</th>
+		<td><%= @user.created_at.strftime("%B %Y") %></td>
+	</tr>
+</table>
