@@ -5,6 +5,56 @@
   <%= page_header %>
   <%= stylesheet_link_tag 'application.css', :media => 'all' %>
   <%= javascript_include_tag 'application' %>
+<script type="text/javascript">
+
+function onLoad() {
+<% if not @strands.nil? %>
+<% @strands.each do |strand| %>
+  var eventSource<%= strand %> = new Timeline.DefaultEventSource();
+<% end%>
+  var bandInfos = [
+<% @strands.each do |strand| %>
+    Timeline.createBandInfo({
+        eventSource:    eventSource<%= strand %>,
+        width:          "<%= 100 / @strands.size %>%", 
+        intervalUnit:   Timeline.DateTime.MONTH, 
+        intervalPixels: 100
+    }),
+<% end %>
+  ];
+
+<% count = 0 %> 
+<% @strands.each do |strand| %>
+  <% if count != 0 %>
+  bandInfos[<%= count %>].syncWith = 0;
+  <% end %>
+  bandInfos[<%= count %>].highlight = true;
+  <% count = count + 1 %>
+<% end %>
+ 
+<% count = 0 %> 
+<% @strands.each do |strand| %>
+  bandInfos[<%= count %>].decorators = [
+    new Timeline.SpanHighlightDecorator({
+      startDate:  "<%= Time.now - (365 * 24 * 60 * 60) %>",
+      endDate:    "<%= Time.now %>",
+      opacity:    50,
+      startLabel: "<%= strand %>",
+      endLabel:   "<%= strand %>"
+    })
+  ];   
+
+  <% count = count + 1 %>
+<% end %>
+
+  tl = Timeline.create(document.getElementById("strands-timeline"), bandInfos);
+<% @strands.each do |strand| %>
+  tl.loadXML("/strands/show_nodes/<%= strand %>/nodes.xml", function(xml, url) { eventSource<%= strand %>.loadXML(xml, url); });
+<% end %>
+}
+<% end %>
+</script>
+  
 </head>
 
 <body onload="onLoad();" onresize="onResize();">
@@ -34,7 +84,7 @@
 
   <div id="footer">
     <hr />
-    <p><a href="http://strnds.com">strnds.com</a></p>
+    <p><a href="/">strnds.com</a></p>
     <ul>
       <li>powered by <a href="http://simile.mit.edu/timeline">SIMILE timeline</a> & <a href="http://typosphere.org">typo</a> /
           styled with <a href="http://quotedprintable.com/pages/scribbish">scribbish</a></li>

@@ -24,6 +24,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect 'strands/nodes.xml', :controller => 'strands', :action => 'nodes'
   map.connect 'strands/show_nodes.xml', :controller => 'strands', :action => 'show_nodes'
+  map.connect 'strands/show/:id/nodes.xml', :controller =>  'strands', :action => 'show'
+  map.connect 'strands/show_nodes/:id/nodes.xml', :controller => 'strands', :action => 'show_nodes'
+  map.connect 'user/show/:id/nodes.xml', :controller => 'user', :action => 'nodes'
   
   # allow neat perma urls
   map.connect 'nodes',

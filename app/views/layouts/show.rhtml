@@ -4,12 +4,42 @@
   <title><%=h page_title %></title>
   <%= page_header %>
   <%= stylesheet_link_tag 'application.css', :media => 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <script type="text/javascript">
+
+function onLoad() {
+  var eventSource = new Timeline.DefaultEventSource();
+  var bandInfos = [
+    Timeline.createBandInfo({
+        eventSource:    eventSource,
+        width:          "90%", 
+        intervalUnit:   Timeline.DateTime.MONTH, 
+        intervalPixels: 100
+    }),
+    Timeline.createBandInfo({
+        showEventText:  false,
+        trackHeight:    0.5,
+        trackGap:       0.2,
+        eventSource:    eventSource,
+        width:          "30%", 
+        intervalUnit:   Timeline.DateTime.YEAR, 
+        intervalPixels: 200
+    })
+  ];
+  bandInfos[1].syncWith = 0;
+  bandInfos[1].highlight = true;
+  
+  tl = Timeline.create(document.getElementById("strands-timeline"), bandInfos);
+  tl.loadXML("/strands/show_nodes/<%= params[:id] %>/nodes.xml", function(xml, url) { eventSource.loadXML(xml, url); });
+}
+
+  </script>
 </head>
 
-<body onload="onLoadShow();" onresize="onResize();">
+<body onload="onLoad();" onresize="onResize();">
 <div id="container">
   <div id="header">
-    <h1><span><a href="http://strnds.com">strnds.com</a></span></h1>
+    <h1><span><a href="/">strnds.com</a></span></h1>
     <h2>connect time/space</h2>
   </div>
 
@@ -33,7 +63,7 @@
 
   <div id="footer">
     <hr />
-    <p><a href="http://strnds.com">strnds.com</a></p>
+    <p><a href="/">strnds.com</a></p>
     <ul>
       <li>powered by <a href="http://simile.mit.edu/timeline">SIMILE timeline</a> & <a href="http://typosphere.org">typo</a> /
           styled with <a href="http://quotedprintable.com/pages/scribbish">scribbish</a></li>

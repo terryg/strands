@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
   before_create :make_activation_code 
 
   has_many :nodes, :extend => TagCountsExtension
-    
+  has_many :feeds, :extend => TagCountsExtension
+  
   # Activates the user in the database.
   def activate
     @activated = true

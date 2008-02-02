@@ -14,6 +14,21 @@
 	</tr>
 </table>
 
+<table>
+<% @user.feeds.each do |feed| %>
+<tr>
+  <td>
+  <%= feed.url %>
+  </td>
+</tr>
+<% end %>
+<tr>
+  <td>
+  
+  </td>
+</tr>
+</table>
+
 <br/>
 <a href="/user/show/<%= @user.id %>">cancel changes</a>
 
