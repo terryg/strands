@@ -14,24 +14,28 @@
 	</tr>
 </table>
 
-<table>
+<p/>
+
+<ul id="my_feeds" style="bullet:none;">
 <% @user.feeds.each do |feed| %>
-<tr>
-  <td>
+<li>
   <%= feed.url %>
-  </td>
-</tr>
+  <%= link_to_remote "[x]", :update => "my_feeds", :url => { :action => "destroy_feed", :id => feed.id } %>
+</li>
 <% end %>
-<tr>
-  <td>
-  
-  </td>
-</tr>
-</table>
+</ul>
 
-<br/>
-<a href="/user/show/<%= @user.id %>">cancel changes</a>
+<p/>
 
-<br/><br/><br/>
+<%= form_remote_tag(:update => "my_feeds",
+                    :url => { :action => :add_feed },
+                    :position => "top" ) %>
+    New URL:
+    <%= text_field_tag :newfeed %>
+    <%= submit_tag "Add feed" %>
+<%= end_form_tag %>
+
+<p/>
+<p/>
 
 <%= link_to "delete my account", { :action => 'destroy', :id => @user.id }, :confirm => "Are you sure?" %>

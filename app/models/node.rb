@@ -6,6 +6,8 @@ class Node < ActiveRecord::Base
   belongs_to :user
   has_one :node_comment_statistic
     
+  attr_accessor :static_url
+  
   def date
     start_date.strftime("%Y-%m-%d") unless start_date.nil?
   end
@@ -47,11 +49,19 @@ class Node < ActiveRecord::Base
   end
     
   def permalink_url
-    "/nodes/read/#{id}"
+    if not id
+      static_url
+    else
+      "/nodes/read/#{id}"    
+    end
   end
   
   def permalink_url(anchor=nil, only_path=true)
-    "/nodes/read/#{id}"
+    if not id
+      static_url
+    else
+      "/nodes/read/#{id}"    
+    end
   end
   
   def trackback_url
