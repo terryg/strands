@@ -139,13 +139,13 @@ class Node < ActiveRecord::Base
     end
   end
 
- def location
-  loc = ["?<br>? ?&nbsp;&nbsp;?", self[:address], self[:city], self[:statecode], self[:postcode]]
- end
+  def location
+    loc = ["?<br>? ?&nbsp;&nbsp;?", self[:address], self[:city], self[:statecode], self[:postcode]]
+  end
  
- def excerpt
-  self[:body].slice(0..64)
- end
+  def excerpt
+    self[:body].slice(0..64)
+  end
  
   # Bloody rails reloading. Nasty workaround.
   def body=(newval)

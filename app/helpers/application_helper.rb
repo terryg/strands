@@ -1,6 +1,20 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   include SidebarHelper
+
+  def escape_chars(str)
+    result = ""
+    str.each_char do |c|
+      if c == '\''
+        result += "&apos;"
+      elsif c == '"'
+        result += "&quot;"
+      else
+        result += c
+      end
+    end
+    return result
+  end
   
   def page_title
     return "strnds.com"
