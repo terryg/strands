@@ -18,19 +18,11 @@ set :user, "tgl"
 # TASKS
 # =============================================================================
 
-desc "The restart webserver"
-task :restart, :roles => :app do
-  run "cd /users/home/tgl/domains/strnds.com/web/current; ./script/process/reaper -a reload"
-end
-
-desc "The spinner task is used by :cold_deploy to start the application up."
-task :spinner, :roles => :app do
-  run "/users/home/tgl/etc/rc.d/rails.sh start"
-end
-
-desc "The reaper task"
-task :reaper, :roles => :app do
-  run "cd /users/home/tgl/domains/strnds.com/web/current; ./script/process/reaper -a reload"
+namespace :deploy do
+  desc "The restart webserver"
+  task :restart, :roles => :app do
+    run "cd /users/home/tgl/domains/strnds.com/web/current; ./script/process/reaper -a reload"
+  end
 end
 
  desc "After updating code we need to populate a new database.yml"
