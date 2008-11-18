@@ -1,7 +1,7 @@
 class Geocode < ActiveRecord::Base
   include Comparable
 
-  has_many :geocodings
+  has_many :geocodings, :dependent => :destroy
   
   validates_uniqueness_of :query
 
@@ -31,6 +31,8 @@ class Geocode < ActiveRecord::Base
   
   def self.create_from_location(location)
     create geocoder.locate(location).attributes.merge(:query => location.to_s)
+  rescue
+    nil
   end
   
   def geocoded
@@ -51,5 +53,14 @@ class Geocode < ActiveRecord::Base
 
   def to_s
     coordinates
+  end
+  
+  # Create a Graticule::Location
+  def to_location
+    returning Graticule::Location.new do |location|
+      [:street, :locality, :region, :postal_code, :country].each do |attr|
+        location.send "#{attr}=", send(attr)
+      end
+    end
   end
 end
