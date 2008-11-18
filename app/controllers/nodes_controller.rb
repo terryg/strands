@@ -2,10 +2,7 @@ class NodesController < ApplicationController
   before_filter :login_required, :only => [ :new, :create, :edit, :update, :comment, :linked ]
 
   helper 'calendar'
-
-  cattr_reader :per_page
-  @@per_page = 25
-
+  
   def index
     list
     render :action => 'list'
@@ -20,11 +17,10 @@ class NodesController < ApplicationController
   end
 
   def tracker
-   @nodes = Node.paginate(:all,
-                          :page => params[:page],
-                          :order => "node_comment_statistics.last_comment_created_at DESC",
-                          :include => :node_comment_statistic)
-    render :action => 'index'
+   @nodes = Node.find(:all,
+                      :order => "node_comment_statistics.last_comment_created_at DESC",
+                      :include => :node_comment_statistic)
+   render_paginated_index
   end
   
   def read
@@ -156,4 +152,15 @@ class NodesController < ApplicationController
     end
     redirect_to :action => 'tracker'
   end
+
+  def render_paginated_index(on_empty = "No nodes found...")
+    return error(on_empty) if @nodes.empty?
+
+    @pages = Paginator.new self, @nodes.size, 25, params[:page]
+    start = @pages.current.offset
+    stop  = (@pages.current.next.offset - 1) rescue @nodes.size
+    # Why won't this work? @articles.slice!(start..stop)
+    @nodes = @nodes.slice(start..stop)
+    render :action => 'index'
+  end  
 end
