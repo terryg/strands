@@ -144,7 +144,7 @@ class Node < ActiveRecord::Base
   end
  
   def excerpt
-    self[:body].slice(0..64)
+    self.generate_html(nil, self.body.slice(0..64))
   end
  
   # Bloody rails reloading. Nasty workaround.
@@ -175,7 +175,7 @@ class Node < ActiveRecord::Base
   end
 
   def self.html_map(field=nil)
-    html_map = { :body => true, :extended => true }
+    html_map = { :label => true, :body => true, :extended => true }
     if field
       html_map[field.to_sym]
     else
@@ -193,6 +193,7 @@ class Node < ActiveRecord::Base
   def generate_html(field, text = nil)
     text ||= self[field].to_s
     # html = text_filter.filter_text_for_content(blog, text, self)
+    html = text.gsub(/&/, '&amp;')
     html ||= text # just in case the filter puked
     html_postprocess(field,html).to_s
   end
@@ -206,7 +207,7 @@ class Node < ActiveRecord::Base
   # The default text filter.  Generally, this is the filter specified by blog.text_filter,
   # but comments may use a different default.
   def default_text_filter
-   # blog.text_filter.to_text_filter
+    # blog.text_filter.to_text_filter
   end
 
   # Grab the text filter for this object.  It's either the filter specified by
@@ -233,7 +234,7 @@ class Node < ActiveRecord::Base
     end
     return result
   end
-         
+
   protected
   
   def self.time_delta(year, month = nil, day = nil)
