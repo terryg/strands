@@ -1,6 +1,6 @@
 <div class="hentry" id="node-<%= node.id %>">
   <h2 class="entry-title">
-    <%= (controller.action_name.include? 'permalink') ? node.label : link_to_permalink(node,node.label) %>
+    <%= (controller.action_name.include? 'permalink') ? node.html(:label) : link_to_permalink(node,node.html(:label)) %>
     <%= content_tag(:span, node.published_comments.size, :class => 'comment_count') if node.published_comments.size > 0 %>
     <%= content_tag(:a, '[edit]', :href => '/nodes/edit/' + node.id.to_s ) if logged_in? and node.user_id == session[:user] %>
   </h2>
