@@ -30,7 +30,7 @@ class NodesController < ApplicationController
 	@map.control_init(:large_map => false,:map_type => false)
     if not @node.geocode.nil?
   	  @map.center_zoom_init([@node.geocode.latitude,@node.geocode.longitude],12)
-	  @map.overlay_init(GMarker.new([@node.geocode.latitude,@node.geocode.longitude],:title => @node.label, :info_window => @node.excerpt))
+	  @map.overlay_init(GMarker.new([@node.geocode.latitude,@node.geocode.longitude],:title => @node.html(:label), :info_window => @node.excerpt))
     end
     @show_map = true
   end
