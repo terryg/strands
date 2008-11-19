@@ -9,6 +9,8 @@ module ApplicationHelper
         result += "&apos;"
       elsif c == '"'
         result += "&quot;"
+      elsif c == '&'
+        result += "&amp;"
       else
         result += c
       end
