@@ -24,7 +24,7 @@ module GoogleAnalytics
     end
     
     def append_to_body(code)
-      response.body.gsub! '</body>', code + '</body>' if response.content_type == "text/html"
+      response.body.gsub! '</body>', code + '</body>'
     end
   end
 end
