@@ -24,7 +24,12 @@ module ApplicationHelper
   
   def page_header
 <<-EOL
-<script src="http://simile.mit.edu/timeline/api/timeline-api.js" type="text/javascript"></script>
+   <script>
+     Timeline_ajax_url="/javascripts/timeline/timeline_ajax/simile-ajax-api.js";
+     Timeline_urlPrefix='/javascripts/timeline/timeline_js/';       
+     Timeline_parameters='bundle=true';
+   </script>
+   <script src="/javascripts/timeline/timeline_js/timeline-api.js" type="text/javascript"></script>
 EOL
   end
  
