@@ -4,11 +4,14 @@
 		<td>
 			<div style="float: left;"><%= @user.login %></div>
 			<div class="greyText smallText" style="float: right;"><a href="/user/show/<%= @user.id %>">http://strnds.com/user/show/<%= @user.id %></a></div>
-		</td>
+	</td>
 	</tr>
 	<tr>
 		<th>member since</th>
-		<td><%= @user.created_at.strftime("%B %Y") %></td>
+		<td>
+                    <div style="float: left;"><%= @user.created_at.strftime("%B %Y") %></div>
+                    <div class="greyText smallText" style="float: right;"><a href="/blog/user/<%= @user.login %>">http://strnds.com/blog/user/<%= @user.login %></a></div>
+                </td>
 	</tr>
 </table>
 
