@@ -80,7 +80,7 @@ function onLoad() {
               'title': '<%= escape_chars node.label %>',
               'options': { 'description': '<%= escape_chars node.body[0, 10] %>...' },
               'point': {
-                   'lat': '<%= node.geocode.latitude %>',
+              'lat': '<%= node.geocode.latitude %>',
                    'lon': '<%= node.geocode.longitude %>',
                  }
             }<% if i != @nodes.length - 1 -%>; <% end -%>
@@ -139,7 +139,7 @@ function onLoad() {
     <hr />
     <p><a href="/">strnds.com</a></p>
     <ul>
-      <li>powered by <a href="http://simile.mit.edu/timeline">SIMILE timeline</a> & <a href="http://typosphere.org">typo</a> /
+      <li>powered by <a href="http://simile.mit.edu/timeline">SIMILE timeline</a> &amp; <a href="http://typosphere.org">typo</a> /
           styled with <a href="http://quotedprintable.com/pages/scribbish">scribbish</a></li>
     </ul>
   </div>
