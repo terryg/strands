@@ -13,6 +13,7 @@ role :db, "tgl.textdriven.com", :primary => true
 
 set :deploy_to, "/users/home/tgl/domains/strnds.com/web" # defaults to "/u/apps/#{application}"
 set :user, "tgl"
+set :use_sudo, false
 
 # =============================================================================
 # TASKS
