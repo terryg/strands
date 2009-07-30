@@ -22,7 +22,7 @@ set :use_sudo, false
 namespace :deploy do
   desc "The restart webserver"
   task :restart, :roles => :app do
-    run "cd /users/home/tgl/domains/strnds.com/web/current; ./script/process/reaper -a reload"
+    run "cd /users/home/tgl; ./etc/rc.d/strnds-fcgi.sh"
   end
 end
 
