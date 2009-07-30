@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     redirect_back_or_default('/')
   end
 
-  def forget_password
+  def forgot_password
     if request.post?
       user = User.find_by_email(params[:user][:email])
       if user
