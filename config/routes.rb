@@ -17,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   map.activate '/activate', :controller => 'users', :action => 'activate'
   map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
   map.reset_password '/reset_password', :controller => 'users', :action => 'reset_password'
+  map.reset '/reset/:reset_code', :controller => 'users', :action => 'reset_password'
 
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.
@@ -44,6 +45,12 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'nodes/:year',
     :controller => 'nodes', :action => 'find_by_date',
     :year => /\d{4}/
+
+
+  map.connect 'nodes/:latitude@:longitude',
+    :controller => 'nodes', :action => 'find_by_geocode',
+    :latitude => '/[\-0-9\.]*/',
+    :longitude => '/[\-0-9\.]*/'
 
   map.connect 'nodes/:year/:month/:day/page/:page',
     :controller => 'nodes', :action => 'find_by_date',
