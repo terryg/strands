@@ -47,10 +47,10 @@ ActionController::Routing::Routes.draw do |map|
     :year => /\d{4}/
 
 
-  map.connect 'nodes/:latitude@:longitude',
+  map.connect 'nodes/by_geocode/:latitude,:longitude',
     :controller => 'nodes', :action => 'find_by_geocode',
-    :latitude => '/[\-0-9\.]*/',
-    :longitude => '/[\-0-9\.]*/'
+    :latitude => /[\-0-9\.]*/,
+    :longitude => /[\-0-9\.]*/
 
   map.connect 'nodes/:year/:month/:day/page/:page',
     :controller => 'nodes', :action => 'find_by_date',
