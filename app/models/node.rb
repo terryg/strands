@@ -15,6 +15,10 @@ class Node < ActiveRecord::Base
   def date_url
     start_date.strftime("%Y/%m/%d") unless start_date.nil?
   end
+  
+  def location_url
+    'by_geocode/' + self.geocode.latitude.to_s + ',' + self.geocode.longitude.to_s unless self.geocode.nil?
+  end
 
   def start_date_extended
     start_date.strftime("%Y-%m-%d") unless start_date.nil?
