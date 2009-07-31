@@ -32,7 +32,11 @@ class NodesController < ApplicationController
   	  @map.center_zoom_init([@node.geocode.latitude,@node.geocode.longitude],12)
 	  @map.overlay_init(GMarker.new([@node.geocode.latitude,@node.geocode.longitude],:title => @node.html(:label), :info_window => @node.excerpt))
     end
-    @show_map = true
+    if @node.geocode.nil?
+      @show_map = false
+    else
+      @show_map = true
+    end
   end
 
   def find_by_date
@@ -40,6 +44,15 @@ class NodesController < ApplicationController
     render_paginated_index
   end
   
+  def find_by_geocode
+    geocode = Geocode.new
+    geocode.latitude = params[:latitude]
+    geocode.longitude = params[:longitude]
+    
+    @nodes = Node.find(:all, :origin => geocode)
+    render_paginated_index
+  end
+
   def new
     @node = Node.new
   end
@@ -152,6 +165,8 @@ class NodesController < ApplicationController
     end
     redirect_to :action => 'tracker'
   end
+
+  protected
 
   def render_paginated_index(on_empty = "No nodes found...")
     return error(on_empty) if @nodes.empty?
