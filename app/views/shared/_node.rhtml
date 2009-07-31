@@ -37,6 +37,7 @@
         <div class="entry-address">
           <%=h node.address %><br/>
           <%=h node.city %> <%=h node.statecode %>&nbsp;&nbsp;<%=h node.postcode %>
+	  (<a href="/nodes/<%=h node.location_url %>">more near...</a>)
         </div>       
 
         <% if with_map? %>
